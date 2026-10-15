@@ -11,8 +11,8 @@ def get_file_content(working_directory: str, file_path: str) -> str:
             return f'Error: Cannot list "{file_path}" as it is outside the permitted working directory'
         if os.path.isfile(target_file) is False:
             return f'Error: "{file_path}" is not a directory'
-        if valid_target_file is True:
-            print(f'Success: "{file_path}" is within the working directory')
+        #if valid_target_file is True:
+            #print(f'Success: "{file_path}" is within the working directory')
     except Exception as e:
         return f"Error: {e}"
 
@@ -30,3 +30,20 @@ def get_file_content(working_directory: str, file_path: str) -> str:
 
     except Exception as e:
         return f"Error: {e}"
+
+schema_get_file_content = {
+    "type": "function",
+    "function": {
+        "name": "get_file_content",
+        "description": "Returns the first however many characters of a file up to the MAX_CHARS parameter",
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "file_path": {
+                    "type": "string",
+                    "description": "File path of target file to get content from, relative to the working directory (default is the working directory itself)",
+                },
+            },
+        },
+    },
+}
